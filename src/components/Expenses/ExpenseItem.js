@@ -5,17 +5,18 @@ import './ExpenseItem.css';
 
 const ExpenseItem = ({ date, title, amount }) => {
 
-    const [item, setItem] = useState(title);
+    const [itemTitle, setItemTitle] = useState(title);
 
     const changeTitle = () => {
-        setItem(item.length > 5 ? item.slice(0, 5) : item);
+        setItemTitle('updated');
+        console.log(itemTitle);
     }
 
     return (
         <Card className='expense-item'>
             <ExpenseDate date={date} />
             <div className='expense-item__description'>
-                <h2>{item}</h2>
+                <h2>{itemTitle}</h2>
                 <div className='expense-item__price'>${amount}</div>
             </div>
             <button onClick={changeTitle}>Change Title</button>
