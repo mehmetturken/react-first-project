@@ -8,7 +8,7 @@ const ExpenseItem = ({ date, title, amount }) => {
     const [item, setItem] = useState(title);
 
     const changeTitle = () => {
-
+        setItem(item.length > 5 ? item.slice(0, 5) : item);
     }
 
     return (
