@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ExpenseForm from "./ExpenseForm";
 import './NewExpense.css';
 
 const NewExpense = (props) => {
+
+    const [isFieldVisible, setFieldVisible] = useState(false);
 
     const saveExpenseDataHandler = (enteredExpenseData) => {
         const expenseData = {
@@ -11,11 +13,21 @@ const NewExpense = (props) => {
             id: Math.random().toString()
         }
         props.onAddExpense(expenseData)
+        setFieldVisible(false);
+    }
+
+    const startEditingHandler = () => {
+        setFieldVisible(true);
+    }
+
+    const stopEditingHandler = () => {
+        setFieldVisible(false);
     }
 
     return (
         <div className="new-expense">
-            <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+            {!isFieldVisible && <button onClick={startEditingHandler}>Add New Expense</button>}
+            {isFieldVisible && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} onCancel={stopEditingHandler} />}
         </div>
     );
 }
